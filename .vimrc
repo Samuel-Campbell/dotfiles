@@ -13,14 +13,18 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'vim-syntastic/syntastic'	      
 Plugin 'nvie/vim-flake8'
 Bundle 'Valloric/YouCompleteMe'
-Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'scrooloose/nerdtree'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'jremmen/vim-ripgrep'           " For crazy fast 'find in project' searching
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+Plugin 'shawncplus/phpcomplete.vim'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -29,18 +33,12 @@ filetype plugin indent on    " required
 " Always show line numbers
 set number
 
-" Auto PEP8 style
-" Tabs = 4 spaces
-" Line width = 80 spaces
-au BufNewFile,BufRead *.py
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set textwidth=79 |
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix
+" Color
 
+set t_Co=256   " This is may or may not needed.
+
+set background=dark
+colorscheme PaperColor
 
 " Encoding
 set encoding=utf-8
@@ -48,9 +46,6 @@ set encoding=utf-8
 " Highlight syntax
 let python_highlight_all=1
 syntax on
-
-" Color scheme
-colorscheme zenburn
 
 " Key mapping
 
@@ -64,9 +59,6 @@ nnoremap <silent> <C-Down> <c-w>j
 nnoremap <Tab> :tabnext<CR>
 autocmd BufWinEnter * NERDTreeMirror
 
-" Run python
-nnoremap <buffer> <F10> :exec '!python3' shellescape(@%, 1)<cr>
-
 set splitbelow
 set splitright
 
@@ -74,6 +66,14 @@ set splitright
 nmap <F6> :NERDTreeToggle<CR>
 autocmd vimenter * NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+
+" --------------------------------
+"  Python
+" --------------------------------
+
+" Run python
+nnoremap <buffer> <F10> :exec '!python3' shellescape(@%, 1)<cr>
 
 python3 << EOF
 import os
@@ -89,11 +89,54 @@ let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_server_python_interpreter='python3'
 
+" Auto PEP8 style
+" Tabs = 4 spaces
+" Line width = 80 spaces
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix
+
+
+" --------------------------------
 " Javascript
+" --------------------------------
+
 let g:javascript_plugin_flow = 1
 let g:jsx_ext_required = 0
 
-au BufNewFile,BufRead *.js,*.html,*.css,*.scss
+
+" --------------------------------
+" Vue
+" --------------------------------
+
+augroup vue.files
+  au!
+  autocmd BufNewFile,BufRead *.vue   set syntax=html
+augroup END
+
+au BufNewFile,BufRead *.vue,*.js,*.html,*.css,*.scss
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4
+
+" --------------------------------
+"  PHP
+" --------------------------------
+
+augroup vue.files
+  au!
+  autocmd BufNewFile,BufRead *.html.twig   set syntax=html
+augroup END
+
+
+let g:phpcomplete_relax_static_constraint = 1
+let g:phpcomplete_complete_for_unknown_classes = 1
+let g:phpcomplete_search_tags_for_variables = 1 
+let g:phpcomplete_cache_taglists = 1
+let g:phpcomplete_enhance_jump_to_definition = 1
+
