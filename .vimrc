@@ -12,7 +12,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'vim-syntastic/syntastic'	      
 Plugin 'nvie/vim-flake8'
-Bundle 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -24,6 +23,8 @@ Plugin 'jremmen/vim-ripgrep'           " For crazy fast 'find in project' search
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'alvan/vim-closetag'
+Plugin 'davidhalter/jedi-vim'
 
 
 " All of your Plugins must be added before the following line
@@ -47,7 +48,9 @@ set encoding=utf-8
 let python_highlight_all=1
 syntax on
 
+" --------------------------------
 " Key mapping
+" --------------------------------
 
 " Switch splits
 nnoremap <silent> <C-Right> <c-w>l
@@ -62,7 +65,9 @@ autocmd BufWinEnter * NERDTreeMirror
 set splitbelow
 set splitright
 
+" -------------------------------
 " NERDTree
+" -------------------------------
 nmap <F6> :NERDTreeToggle<CR>
 autocmd vimenter * NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -83,11 +88,6 @@ if 'VIRTUAL_ENV' in os.environ:
 	activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
 	execfile(activate_this, dict(__file__=activate_this))
 EOF
-
-" Auto completeBundle 'Valloric/YouCompleteMe'
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-let g:ycm_server_python_interpreter='python3'
 
 " Auto PEP8 style
 " Tabs = 4 spaces
@@ -120,15 +120,50 @@ augroup vue.files
 augroup END
 
 au BufNewFile,BufRead *.vue,*.js,*.html,*.css,*.scss
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
+    \ filetype indent on |
+    \ set smartindent
+
+" filenames like *.xml, *.html, *.xhtml, ...
+" These are the file extensions where this plugin is enabled.
+"
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.vue'
+
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.vue'
+
+" filetypes like xml, html, xhtml, ...
+" These are the file types where this plugin is enabled.
+"
+let g:closetag_filetypes = 'html,xhtml,phtml,vue'
+
+" filetypes like xml, xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filetypes = 'xhtml,jsx,vue'
+
+" integer value [0|1]
+" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+"
+let g:closetag_emptyTags_caseSensitive = 1
+
+" Shortcut for closing tags, default is '>'
+"
+let g:closetag_shortcut = '>'
+
+" Add > at current position without closing the current tag, default is ''
+"
+let g:closetag_close_shortcut = '<leader>>'
 
 " --------------------------------
 "  PHP
 " --------------------------------
 
-augroup vue.files
+augroup twig.files
   au!
   autocmd BufNewFile,BufRead *.html.twig   set syntax=html
 augroup END
