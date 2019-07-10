@@ -25,6 +25,7 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'alvan/vim-closetag'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'iamcco/markdown-preview.vim'
 
 
 " All of your Plugins must be added before the following line
@@ -34,17 +35,25 @@ filetype plugin indent on    " required
 " Always show line numbers
 set number
 
+" --------------------------------
 " Color
+"" --------------------------------
 
 set t_Co=256   " This is may or may not needed.
 
 set background=dark
 colorscheme PaperColor
 
+" --------------------------------
 " Encoding
+"" --------------------------------
+
 set encoding=utf-8
 
+" --------------------------------
 " Highlight syntax
+"" --------------------------------
+
 let python_highlight_all=1
 syntax on
 
@@ -62,6 +71,8 @@ nnoremap <silent> <C-Down> <c-w>j
 nnoremap <Tab> :tabnext<CR>
 autocmd BufWinEnter * NERDTreeMirror
 
+" Markdown View
+nnoremap <C-P> :MarkdownPreview<CR>
 set splitbelow
 set splitright
 
@@ -119,7 +130,7 @@ augroup vue.files
   autocmd BufNewFile,BufRead *.vue   set syntax=html
 augroup END
 
-au BufNewFile,BufRead *.vue,*.js,*.html,*.css,*.scss
+au BufNewFile,BufRead *.vue,*.js,*.html,*.css,*.json,*.scss
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2 |
