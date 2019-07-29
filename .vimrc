@@ -26,40 +26,30 @@ Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'alvan/vim-closetag'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'iamcco/markdown-preview.vim'
+Plugin 'heavenshell/vim-pydocstring'
 
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-" Always show line numbers
-set number
 
 " --------------------------------
-" Color
-"" --------------------------------
+" Common
+" --------------------------------
 
-set t_Co=256   " This is may or may not needed.
+call vundle#end()            
+filetype plugin indent on    
+
+set number
+
+set t_Co=256   
 
 set background=dark
 colorscheme PaperColor
 
-" --------------------------------
-" Encoding
-"" --------------------------------
-
 set encoding=utf-8
 
-" --------------------------------
-" Highlight syntax
-"" --------------------------------
+nmap <F6> :NERDTreeToggle<CR>
+autocmd vimenter * NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-let python_highlight_all=1
 syntax on
-
-" --------------------------------
-" Key mapping
-" --------------------------------
 
 " Switch splits
 nnoremap <silent> <C-Right> <c-w>l
@@ -76,17 +66,15 @@ nnoremap <C-P> :MarkdownPreview<CR>
 set splitbelow
 set splitright
 
-" -------------------------------
-" NERDTree
-" -------------------------------
-nmap <F6> :NERDTreeToggle<CR>
-autocmd vimenter * NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
 
 " --------------------------------
 "  Python
 " --------------------------------
+let python_highlight_all=1
+let g:syntastic_python_checkers=['flake8']
+
+" Docstring mapping
+nmap <silent> <C-m> <Plug>(pydocstring)
 
 " Run python
 nnoremap <buffer> <F10> :exec '!python3' shellescape(@%, 1)<cr>
@@ -119,10 +107,11 @@ au BufNewFile,BufRead *.py
 
 let g:javascript_plugin_flow = 1
 let g:jsx_ext_required = 0
+let g:syntastic_javascript_checkers=['eslint']
 
 
 " --------------------------------
-" Vue
+" Vue / React
 " --------------------------------
 
 augroup vue.files
@@ -130,32 +119,32 @@ augroup vue.files
   autocmd BufNewFile,BufRead *.vue   set syntax=html
 augroup END
 
-au BufNewFile,BufRead *.vue,*.js,*.html,*.css,*.json,*.scss
-    \ set tabstop=2 |
-    \ set softtabstop=2 |
-    \ set shiftwidth=2 |
+au BufNewFile,BufRead *.vue,*.js,*.html,*.css,*.json,*.scss,*.jsx
+    \ set tabstop=4 |
+    \ set shiftwidth=4 |
     \ filetype indent on |
-    \ set smartindent
+    \ set smartindent |
+    \ set expandtab 
 
 " filenames like *.xml, *.html, *.xhtml, ...
 " These are the file extensions where this plugin is enabled.
 "
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.vue'
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.vue,*.jsx'
 
 " filenames like *.xml, *.xhtml, ...
 " This will make the list of non-closing tags self-closing in the specified files.
 "
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.vue'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.vue,*.jsx'
 
 " filetypes like xml, html, xhtml, ...
 " These are the file types where this plugin is enabled.
 "
-let g:closetag_filetypes = 'html,xhtml,phtml,vue'
+let g:closetag_filetypes = 'html,xhtml,phtml,vue,*.jsx'
 
 " filetypes like xml, xhtml, ...
 " This will make the list of non-closing tags self-closing in the specified files.
 "
-let g:closetag_xhtml_filetypes = 'xhtml,jsx,vue'
+let g:closetag_xhtml_filetypes = 'xhtml,jsx,vue,*.jsx'
 
 " integer value [0|1]
 " This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
@@ -169,6 +158,7 @@ let g:closetag_shortcut = '>'
 " Add > at current position without closing the current tag, default is ''
 "
 let g:closetag_close_shortcut = '<leader>>'
+
 
 " --------------------------------
 "  PHP
