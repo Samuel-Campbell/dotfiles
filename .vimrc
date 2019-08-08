@@ -13,15 +13,12 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'vim-syntastic/syntastic'	      
 Plugin 'nvie/vim-flake8'
 Plugin 'tpope/vim-fugitive'
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'vim-airline/vim-airline'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'scrooloose/nerdtree'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'jremmen/vim-ripgrep'           " For crazy fast 'find in project' searching
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
+Plugin 'tyrannicaltoucan/vim-deep-space'
 Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'alvan/vim-closetag'
 Plugin 'davidhalter/jedi-vim'
@@ -37,11 +34,6 @@ call vundle#end()
 filetype plugin indent on    
 
 set number
-
-set t_Co=256   
-
-set background=dark
-colorscheme PaperColor
 
 set encoding=utf-8
 
@@ -66,12 +58,35 @@ nnoremap <C-P> :MarkdownPreview<CR>
 set splitbelow
 set splitright
 
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+
+" --------------------------------
+"  Syntastic
+" --------------------------------
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_javascript_checkers=['eslint']
+let syntastic_mode_map = { 'passive_filetypes': ['jsx'] }
+noremap <silent> sc :SyntasticCheck<CR>
+
+" --------------------------------
+" Color scheme
+" --------------------------------
+
+set t_Co=256   
+
+set background=dark
+set termguicolors
+let g:deepspace_italics=1
+colorscheme deep-space
+let g:airline_theme='deep_space'
+
 
 " --------------------------------
 "  Python
 " --------------------------------
 let python_highlight_all=1
-let g:syntastic_python_checkers=['flake8']
 
 " Docstring mapping
 nmap <silent> <C-m> <Plug>(pydocstring)
@@ -107,7 +122,6 @@ au BufNewFile,BufRead *.py
 
 let g:javascript_plugin_flow = 1
 let g:jsx_ext_required = 0
-let g:syntastic_javascript_checkers=['eslint']
 
 
 " --------------------------------
