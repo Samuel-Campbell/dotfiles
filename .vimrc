@@ -14,6 +14,7 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'nvie/vim-flake8'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'scrooloose/nerdtree'
 Plugin 'pangloss/vim-javascript'
@@ -24,6 +25,7 @@ Plugin 'alvan/vim-closetag'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'iamcco/markdown-preview.vim'
 Plugin 'heavenshell/vim-pydocstring'
+Plugin 'psf/black'
 
 
 " --------------------------------
@@ -74,14 +76,11 @@ noremap <silent> sc :SyntasticCheck<CR>
 " Color scheme
 " --------------------------------
 
-set t_Co=256   
-
 set background=dark
 set termguicolors
-let g:deepspace_italics=1
 colorscheme deep-space
+let g:deepspace_italics=1
 let g:airline_theme='deep_space'
-
 
 " --------------------------------
 "  Python
