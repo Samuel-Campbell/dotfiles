@@ -22,7 +22,7 @@ Plugin 'mxw/vim-jsx'
 Plugin 'tyrannicaltoucan/vim-deep-space'
 Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'alvan/vim-closetag'
-Plugin 'davidhalter/jedi-vim'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'iamcco/markdown-preview.vim'
 Plugin 'heavenshell/vim-pydocstring'
 Plugin 'psf/black'
@@ -83,8 +83,16 @@ let g:deepspace_italics=1
 let g:airline_theme='deep_space'
 
 " --------------------------------
+" you complete me
+" --------------------------------
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+
+" --------------------------------
 "  Python
 " --------------------------------
+let g:pymode_rope = 0
 let python_highlight_all=1
 
 " Docstring mapping
