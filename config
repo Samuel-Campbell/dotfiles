@@ -1,6 +1,7 @@
 [global_config]
   enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
   inactive_color_offset = 0.807692307692
+  suppress_multiple_term_dialog = True
   title_transmit_bg_color = "#000000"
 [keybindings]
 [layouts]

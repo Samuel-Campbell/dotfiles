@@ -60,6 +60,9 @@ nnoremap <C-P> :MarkdownPreview<CR>
 set splitbelow
 set splitright
 
+" Press F4 to toggle highlighting on/off, and show current value.
+:noremap <F4> :set hlsearch! hlsearch?<CR>
+
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 
