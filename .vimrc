@@ -20,12 +20,15 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'tyrannicaltoucan/vim-deep-space'
-Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'alvan/vim-closetag'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'iamcco/markdown-preview.vim'
 Plugin 'heavenshell/vim-pydocstring'
 Plugin 'psf/black'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plugin 'junegunn/fzf.vim'
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
 
 " --------------------------------
@@ -38,6 +41,8 @@ filetype plugin indent on
 set number
 
 set encoding=utf-8
+
+set backspace=indent,eol,start
 
 nmap <F6> :NERDTreeToggle<CR>
 autocmd vimenter * NERDTree
@@ -56,7 +61,7 @@ nnoremap <Tab> :tabnext<CR>
 autocmd BufWinEnter * NERDTreeMirror
 
 " Markdown View
-nnoremap <C-P> :MarkdownPreview<CR>
+nnoremap <C-m> :MarkdownPreview<CR>
 set splitbelow
 set splitright
 
@@ -66,13 +71,21 @@ set splitright
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gr <Plug>(coc-references)
+nnoremap <C-p> :GFiles<CR>
+
 " --------------------------------
 "  Syntastic
 " --------------------------------
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_javascript_checkers=['eslint']
-let syntastic_mode_map = { 'passive_filetypes': ['jsx'] }
 noremap <silent> sc :SyntasticCheck<CR>
 
 " --------------------------------
@@ -131,6 +144,7 @@ au BufNewFile,BufRead *.py
 " --------------------------------
 
 let g:javascript_plugin_flow = 1
+let g:javascript_plugin_jsdoc = 0
 let g:jsx_ext_required = 0
 
 
