@@ -28,7 +28,6 @@ Plugin 'psf/black'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
 
 " --------------------------------
@@ -73,9 +72,6 @@ set splitright
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gr <Plug>(coc-references)
-nnoremap <C-p> :GFiles<CR>
 
 " --------------------------------
 "  Syntastic
