@@ -17,6 +17,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'scrooloose/nerdtree'
+Plugin 'ryanoasis/vim-devicons'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'tyrannicaltoucan/vim-deep-space'
@@ -95,6 +96,7 @@ set termguicolors
 colorscheme deep-space
 let g:deepspace_italics=1
 let g:airline_theme='deep_space'
+let g:airline_powerline_fonts = 1
 
 " --------------------------------
 " you complete me
@@ -102,6 +104,13 @@ let g:airline_theme='deep_space'
 let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
+
+" --------------------------------
+"  fzf
+" --------------------------------
+nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> <Leader>f :Rg<CR>
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 " --------------------------------
 "  Python
