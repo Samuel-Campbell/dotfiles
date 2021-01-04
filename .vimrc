@@ -21,6 +21,7 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'tyrannicaltoucan/vim-deep-space'
+Plugin 'wadackel/vim-dogrun'
 Plugin 'alvan/vim-closetag'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'iamcco/markdown-preview.vim'
@@ -91,6 +92,7 @@ noremap <silent> sc :SyntasticCheck<CR>
 " Color scheme
 " --------------------------------
 
+set t_Co=256
 set background=dark
 set termguicolors
 colorscheme deep-space
