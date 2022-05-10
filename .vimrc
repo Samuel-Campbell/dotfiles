@@ -21,12 +21,13 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'tyrannicaltoucan/vim-deep-space'
+Plugin 'arcticicestudio/nord-vim'
+Plugin 'cocopon/iceberg.vim'
 Plugin 'wadackel/vim-dogrun'
 Plugin 'alvan/vim-closetag'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'iamcco/markdown-preview.vim'
 Plugin 'heavenshell/vim-pydocstring'
-Plugin 'psf/black'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
@@ -95,9 +96,9 @@ noremap <silent> sc :SyntasticCheck<CR>
 set t_Co=256
 set background=dark
 set termguicolors
-colorscheme deep-space
+colorscheme nord
 let g:deepspace_italics=1
-let g:airline_theme='deep_space'
+let g:airline_theme='nord'
 let g:airline_powerline_fonts = 1
 
 " --------------------------------
@@ -136,13 +137,13 @@ if 'VIRTUAL_ENV' in os.environ:
 EOF
 
 " Auto PEP8 style
-" Tabs = 4 spaces
-" Line width = 80 spaces
+" Tabs = 2 spaces
+" Line width = 119 spaces
 au BufNewFile,BufRead *.py
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set textwidth=79 |
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
+    \ set textwidth=119 |
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix
